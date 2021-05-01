@@ -1,0 +1,46 @@
+/*
+Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.
+
+Example:
+Input: root = [1,2,3,null,5,null,4]
+Output: [1,3,4]
+
+Example:
+Input: root = [1,null,3]
+Output: [1,3]
+*/
+
+class Solution {
+    public List<Integer> rightSideView(TreeNode root) {
+        
+        List<Integer> res = new ArrayList<Integer>();
+        
+        // To check if the input is null or empty
+        if(root == null) return res;
+        
+        // To maintain the level order of nodes as traversed
+        Queue<TreeNode> queue = new LinkedList<>();
+        
+        queue.add(root);
+        int size = queue.size();
+        
+        // Check the remaining nodes in current level of tree
+        while(!queue.isEmpty() && size-- > 0){
+            
+            TreeNode curr = queue.remove();
+            // To traverse the left and right child of current node, if present
+            if(curr.left != null) queue.add(curr.left);
+            if(curr.right != null) queue.add(curr.right);
+            // If current node is the last node for the level, add to the result
+            if(size == 0){
+                res.add(curr.val);
+                // Update queue size to number of nodes in next level
+                size = queue.size();
+            }
+            
+        }
+        
+        return res;        
+        
+    }
+}

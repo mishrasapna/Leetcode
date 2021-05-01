@@ -1,0 +1,48 @@
+/*
+Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.
+Given a characters array tasks, representing the tasks a CPU needs to do, where each letter represents a different task.
+Tasks could be done in any order.
+Each task is done in one unit of time. For each unit of time, the CPU could complete either one task or just be idle.
+However, there is a non-negative integer n that represents the cooldown period between two same tasks (the same letter in the array), that is that there must be at least n units of time between any two same tasks.
+
+Return the least number of units of times that the CPU will take to finish all the given tasks.
+Example:
+Input: tasks = ["A","A","A","B","B","B"], n = 2
+Output: 8
+Explanation: 
+A -> B -> idle -> A -> B -> idle -> A -> B
+There is at least 2 units of time between any two same tasks.
+*/
+
+class Solution {
+    public int leastInterval(char[] tasks, int n) {
+        // To store the highest frequency of a task
+        int max=0;
+        // To store the number of highest frequency tasks
+        int maxCount=0;
+        // To use as a counter for counting frequency of each tasks
+        int[] count = new int[26];
+        for(char c: tasks){
+            count[c - 'A']++;
+            // To check if current task has max frequency
+            // increment maxCount for number of high freq tasks
+            if(max == count[c-'A']){
+                maxCount++;
+            }
+            // To check if max < frequency of current task
+            // reset maxCount to 1 for number of high freq tasks
+            else if(max < count[c-'A']){
+                max = count[c-'A'];
+                maxCount = 1;
+            }
+        }
+        int partCount = max - 1;
+        int partLength = n - (maxCount-1);
+        int emptySlots = partCount * partLength;
+        int availableTasks = tasks.length - max * maxCount;
+        int idles = Math.max(0, emptySlots - availableTasks);
+        
+        return tasks.length+idles;
+        
+    }
+}
