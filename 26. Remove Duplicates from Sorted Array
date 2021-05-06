@@ -1,0 +1,11 @@
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int j= 0;
+        for(int i =1; i<nums.length ;i++){
+            if(nums[i]!=nums[j])//comparing i & i-1 element of array
+                j++; // incrementing only when there is no match between the element
+                nums[j]=nums[i];// swapping the element to shift the duplicates at the end.
+        }
+        return j+1;// returning j+1 as we initialized j = 0
+    }
+}
