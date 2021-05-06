@@ -1,0 +1,17 @@
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        
+        //Create hashmap to store the elements of the array with their index.Hashmap follows no order for traversing and fining cooresponding elements is easy.
+        HashMap<Integer,Integer> hv= new HashMap<>();
+        
+                            
+        for (int i=0 ; i<nums.length; i++ ){
+            if (hv.containsKey(target-nums[i]) && (i !=hv.get(target-nums[i])))
+               return new int[]{i,hv.get(target-nums[i])};
+            hv.put(nums[i], i);
+        }
+        
+         throw new IllegalArgumentException();
+        
+    }
+}
