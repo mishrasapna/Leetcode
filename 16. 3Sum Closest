@@ -1,0 +1,27 @@
+class Solution {
+    public int threeSumClosest(int[] nums, int target) {
+        
+    int resCurr = 0;
+    int resPrev = nums[0]+ nums[1]+nums[nums.length-1];
+    Arrays.sort(nums);// sort the array to make the decission easier.
+        for(int i = 0; i<nums.length-2 ; i++){
+            int left = i+1, right = nums.length-1;
+            while(left < right){
+                resCurr = nums[i]+ nums[left]+nums[right];
+                
+                //System.out.println("nums: "+ nums[i]+ nums[left]+nums[right]);
+                if (resCurr<target)
+                    left++;
+                else
+                    right--;
+                if(Math.abs(resCurr-target) < Math.abs(resPrev-target) )
+                    resPrev=resCurr;
+                //System.out.println("resPrev: " + resPrev);
+                //System.out.println("resCurr: "+ resCurr);
+            }            
+                    
+        }
+        
+        return resPrev;
+    }
+}
