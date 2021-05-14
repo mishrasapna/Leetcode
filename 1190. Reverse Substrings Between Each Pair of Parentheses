@@ -1,0 +1,65 @@
+class Solution {
+   public String reverseParentheses(String s) {
+        
+        //Stack and queue DS is consuming too much time and memory.
+        
+//         Stack<Character> S1 = new Stack<>();
+//         Queue<Character> Q1 = new LinkedList<>();
+        
+//         for (char c: s.toCharArray()){
+//             if(!S1.empty() && c==')'){
+//                 while (S1.peek()!='('){
+                    
+//                     Q1.add(S1.pop());
+//                     }
+//                 S1.pop();
+                
+//                 while (!Q1.isEmpty())
+//                 S1.push(Q1.remove());
+                
+//             }
+//             else S1.push(c);
+//         }
+        
+//         StringBuilder sb = new StringBuilder();
+        
+//         for (char a: S1){
+//         sb.append(a);
+//         }
+//        return sb.toString(); 
+//     }
+        
+       
+      // public String reverseParentheses(String s) {
+        int n = s.length();
+        Stack<Integer> opened = new Stack<>();
+        int[] pair = new int[n];
+        for (int i = 0; i < n; ++i) {
+            if (s.charAt(i) == '(')
+                opened.push(i);
+            if (s.charAt(i) == ')') {
+                int j = opened.pop();
+                pair[i] = j;
+                pair[j] = i;
+                // System.out.println("i: "+ i + " J:" + j );
+            }
+           
+       
+        //System.out.println(Arrays.toString(pair));
+      
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0, d = 1; i < n; i += d) {
+            if (s.charAt(i) == '(' || s.charAt(i) == ')') {
+                i = pair[i];
+                d = -d;
+               System.out.println("i: "+ i + " d:" + d ); 
+                //System.out.println("calc:" +  (i += d) );
+            } else {
+                sb.append(s.charAt(i));
+                System.out.println("sb: "+ sb );
+            }
+        }
+        return sb.toString();
+    }
+}
