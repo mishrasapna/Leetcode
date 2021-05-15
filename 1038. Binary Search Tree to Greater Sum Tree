@@ -1,0 +1,16 @@
+class Solution {
+    
+    TreeNode prev = new TreeNode() ;
+    public TreeNode bstToGst(TreeNode root) {
+       
+        
+        if (root != null){
+            if(root.right!= null) bstToGst(root.right);
+            System.out.println(prev.val);
+            root.val += prev.val;
+            prev = root;
+            if(root.left!= null) bstToGst(root.left);
+            }
+        return root;
+    }
+}
