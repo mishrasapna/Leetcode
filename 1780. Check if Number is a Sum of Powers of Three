@@ -1,0 +1,18 @@
+class Solution {
+    //ternary representation has 2 then its not divisible by 3
+    public boolean checkPowersOfThree(int n) {
+      return helper(n) != 2 ? true : false;  
+    }
+    
+    int quo=0, rem=0;
+    public int helper(int n){
+        if(n>=3){
+            rem = n%3;
+            quo = n/3;
+            if(rem==2 || quo==2) return rem; // if remainder or quotient has 2 , it will return false.
+            else if(quo>3) helper(quo);
+        }
+        else quo=n; //If n= 2 so it will not be divisible by 3
+        return (rem==2) ? rem : quo;
+    }
+}
